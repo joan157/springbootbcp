@@ -1,12 +1,14 @@
-package edu.bcp.clientebcp;
+package edu.bcp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import edu.bcp.config.AppConfig;
 
-@SpringBootTest(classes = AppConfig.class)
-class ClientebcpApplicationTests {
+@ContextConfiguration(classes = AppConfig.class)
+@SpringBootTest
+class AppConfigTest {
 
 	@Test
 	void contextLoads() {

@@ -1,15 +1,16 @@
 package edu.bcp.entity;
-import edu.bcp.dto.CuentaDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 import jakarta.persistence.Column;
-import jakarta.persistence.ColumnResult;
-import jakarta.persistence.ConstructorResult;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SqlResultSetMapping;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "cuenta")
 public class CuentaEntity {
     
+    public CuentaEntity(Integer idcuenta, Double saldo, String moneda, ClienteEntity cliente){
+        this.idcuenta = idcuenta;
+        this.saldo = saldo;
+        this.moneda = moneda;
+        this.cliente = cliente;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idcuenta")
@@ -47,4 +55,11 @@ public class CuentaEntity {
 
     @Transient
     private String estado;
+
+    @Autowired
+    public String toString(){
+        return "CuentaEntity [idcuenta = " + idcuenta + ", saldo=" + saldo+
+        ", moneda = " + moneda + ", cliente = " + cliente + ", estado = " + estado
+        + "]";
+    }
 }

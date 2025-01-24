@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.bcp.dto.CuentaDTO;
+import edu.bcp.entity.CuentaEntity;
 import edu.bcp.service.CuentaService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 @RestController
 @RequestMapping("api/bcpP/v1/cuenta")
@@ -39,5 +44,11 @@ public class CuentaRestController {
         return cuentaService.listarCuentasEstado();
     }
 
+    @PutMapping("/{idcuenta}")
+    public void envioSaldo(@RequestParam Double monto,  @PathVariable Integer idcuenta, @RequestParam Integer idcuentadestino) {   
+        CuentaEntity cuentaA = cuentaService.obtenerCuentaInfo(idcuenta);
+        cuentaService.enviarSaldo(monto, cuentaA, idcuentadestino);
+    }
+    
 
 }

@@ -10,6 +10,9 @@ import edu.bcp.entity.CuentaEntity;
 
 public interface CuentaRepository extends JpaRepository<CuentaEntity, Integer>{
     
+    @Query(value = "SELECT * FROM CUENTA WHERE IDCUENTA =?1", nativeQuery = true)
+    public abstract CuentaEntity obtenerCuentaInfo(Integer idcuenta);
+
     @Query(value = "SELECT * FROM CUENTA", nativeQuery = true)
     public abstract List<CuentaEntity> listarCuentas();
 
@@ -18,7 +21,7 @@ public interface CuentaRepository extends JpaRepository<CuentaEntity, Integer>{
 
     @Query(value = "SELECT * FROM CUENTA WHERE saldo BETWEEN ?1 AND ?2", nativeQuery =true)
     public abstract List<CuentaEntity> listarCuentasRango(Integer desde, Integer hasta);
-
+    
 
     
     @Query(value = " SELECT *, CASE WHEN SALDO < (SELECT AVG(cuenta.saldo) FROM CUENTA) THEN 'BAJO EL PROMEDIO TOTAL'"+
